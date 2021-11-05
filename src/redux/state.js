@@ -7,7 +7,7 @@ let state = {
             {id: 2, message: 'It\'s my first post', likesCount: 31},
             {id: 3, message: 'ITK', likesCount: 11}
         ],
-        newPostText: 'ITK'
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -65,7 +65,7 @@ let state = {
             {
                 id: 6,
                 name: 'Artem',
-                avatar: 'https://lh3.googleusercontent.com/proxy/qxgmdLVClzxfJFRW1Q0MPvWn6GR4YCL32AL09N9tWsCMhKgMkASNzePg2OU3bWM5jJ5DxaXAYFBz5XyXaQ_u8H5UTn_6nwBMakY',
+                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQkHfyUXpFU_i8g1PIp_T-hSSyb8PYePWprg&usqp=CAU',
                 dialog:
                     [
                         {id: 1, message: 'Hello', iOrNot: false},
@@ -76,6 +76,7 @@ let state = {
                     ]
             }
         ],
+        newMessageText: ''
     },
     navBarFriends: [
         {name: 'Evgen', avatar: 'https://www.blast.hk/attachments/64805/'},
@@ -97,6 +98,22 @@ export let addPost = () => {
 
 export let updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
+    rerender(state);
+}
+
+export let addMessage = (id) => {
+    let newMessage = {
+        id: 7,
+        message: state.dialogsPage.newMessageText,
+        iOrNot: true
+    };
+    state.dialogsPage.dialogs[id].dialog.push(newMessage);
+    state.dialogsPage.newMessageText = '';
+    rerender(state);
+}
+
+export let updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
     rerender(state);
 }
 
