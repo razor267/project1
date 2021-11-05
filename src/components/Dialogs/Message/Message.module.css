@@ -1,0 +1,15 @@
+.message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    padding: 3px;
+    vertical-align: middle;
+}
+
+.i {
+    text-align: right;
+}
+
+.friend {
+text-align: left;
+}

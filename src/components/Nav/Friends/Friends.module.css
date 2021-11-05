@@ -1,0 +1,32 @@
+.friendsBar {
+    display: grid;
+    color: white;
+    font-size: 15px;
+    grid-template-areas: "h1 h1 h1" "f1 f2 f3";
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px;
+}
+.friendsBar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+
+.header {
+    font-size: 25px;
+    grid-area: h1;
+    text-align: center;
+}
+
+.f1 {
+    grid-area: f1;
+}
+
+.f2 {
+    grid-area: f2;
+}
+
+.f3 {
+    grid-area: f3;
+}
