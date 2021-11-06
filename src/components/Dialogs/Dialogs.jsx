@@ -8,27 +8,30 @@ function GetUserUrl() {
     let url = window.location.href;
     let res;
 
-    url[url.length-1]<=6 ? res = url[url.length-1]-1 : res = 0;
+    url[url.length - 1] <= 6 ? res = url[url.length - 1] - 1 : res = 0;
 
-return res
+    return res
 }
 
 
 const Dialogs = (props) => {
-    // debugger;
 
     let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
-    let messagesElements = props.state.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message} iOrNot={m.iOrNot} avatar={props.state.dialogs[GetUserUrl()].avatar}/>);
+    let messagesElements = props.state.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
+                                                                                      iOrNot={m.iOrNot}
+                                                                                      avatar={props.state.dialogs[GetUserUrl()].avatar}/>);
 
     let newMessageElement = React.createRef();
 
     let newMessage = () => {
-        props.addMessage(GetUserUrl());
+        let idDialog = GetUserUrl();
+        let idMessage = props.state.dialogs[idDialog].dialog.length + 1
+        props.dispatch({type: 'NEW-MESSAGE', idMessage: idMessage, idDialog: idDialog});
     }
 
     let onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.updateNewMessageText(text);
+        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text});
     }
 
     return (
