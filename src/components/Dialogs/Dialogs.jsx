@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {newMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
 
 function GetUserUrl() {
 
@@ -12,7 +13,6 @@ function GetUserUrl() {
 
     return res
 }
-
 
 const Dialogs = (props) => {
 
@@ -26,12 +26,12 @@ const Dialogs = (props) => {
     let newMessage = () => {
         let idDialog = GetUserUrl();
         let idMessage = props.state.dialogs[idDialog].dialog.length + 1
-        props.dispatch({type: 'NEW-MESSAGE', idMessage: idMessage, idDialog: idDialog});
+        props.dispatch(newMessageActionCreator(idMessage, idDialog));
     }
 
     let onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text});
+        props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
     return (
