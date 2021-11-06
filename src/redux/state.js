@@ -1,4 +1,5 @@
-import {rerender} from "../render";
+let rerender = () => {
+}
 
 let state = {
     profilePage: {
@@ -85,7 +86,7 @@ let state = {
     ]
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 4,
         message: state.profilePage.newPostText,
@@ -96,12 +97,12 @@ export let addPost = () => {
     rerender(state);
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerender(state);
 }
 
-export let addMessage = (id) => {
+export const addMessage = (id) => {
     let newMessage = {
         id: 7,
         message: state.dialogsPage.newMessageText,
@@ -112,9 +113,13 @@ export let addMessage = (id) => {
     rerender(state);
 }
 
-export let updateNewMessageText = (newText) => {
+export const updateNewMessageText = (newText) => {
     state.dialogsPage.newMessageText = newText;
     rerender(state);
+}
+
+export const subscribe = (observer) => {
+    rerender = observer;
 }
 
 export default state;
