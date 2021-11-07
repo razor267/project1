@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const NEW_MESSAGE = 'NEW-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./gialogsReducer";
+import navBarReducer from "./navBarReducer";
 
 let store = {
     _state: {
@@ -102,42 +101,14 @@ let store = {
     },
 
     dispatch(action) {  // { type: 'text' .......... }
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: action.id,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === NEW_MESSAGE) {
-            let newMessage = {
-                id: action.idMessage,
-                message: this._state.dialogsPage.newMessageText,
-                iOrNot: true
-            };
-            this._state.dialogsPage.dialogs[action.idDialog].dialog.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this._callSubscriber(this._state);
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.navBarFriends = navBarReducer(this._state.navBarFriends, action);
+
+        this._callSubscriber(this._state);
     }
 }
-
-export const addPostActionCreator = (newElementArrayId) => ({type: ADD_POST, id: newElementArrayId});
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-export const newMessageActionCreator = (idMessage, idDialog) => ({
-    type: NEW_MESSAGE,
-    idMessage: idMessage,
-    idDialog: idDialog
-});
-export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
 
 export default store;
 

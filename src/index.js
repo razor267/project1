@@ -3,12 +3,15 @@ import reportWebVitals from './reportWebVitals';
 import store from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {BrowserRouter} from "react-router-dom";
 
 let rerender = (state) => {
     ReactDOM.render(
-        <React.StrictMode>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
-        </React.StrictMode>,
+        <BrowserRouter>
+            <React.StrictMode>
+                <App state={state} dispatch={store.dispatch.bind(store)}/>
+            </React.StrictMode>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }

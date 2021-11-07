@@ -2,7 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {newMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
+import {newMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/gialogsReducer";
 
 function GetUserUrl() {
 
@@ -21,16 +21,14 @@ const Dialogs = (props) => {
                                                                                       iOrNot={m.iOrNot}
                                                                                       avatar={props.state.dialogs[GetUserUrl()].avatar}/>);
 
-    let newMessageElement = React.createRef();
-
     let newMessage = () => {
         let idDialog = GetUserUrl();
         let idMessage = props.state.dialogs[idDialog].dialog.length + 1
         props.dispatch(newMessageActionCreator(idMessage, idDialog));
     }
 
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value;
+    let onMessageChange = (e) => {
+        let text = e.target.value;
         props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
@@ -44,7 +42,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.newMessage}>
                 <div>
-                    <textarea onChange={onMessageChange} ref={newMessageElement} value={props.state.newMessageText}/>
+                    <textarea placeholder='Enter your message' onChange={onMessageChange}
+                              value={props.state.newMessageText}/>
                 </div>
                 <div>
                     <button onClick={newMessage}>Add post</button>
