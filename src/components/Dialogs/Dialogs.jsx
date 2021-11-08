@@ -19,7 +19,8 @@ const Dialogs = (props) => {
     let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
     let messagesElements = props.state.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
                                                                                       iOrNot={m.iOrNot}
-                                                                                      avatar={props.state.dialogs[GetUserUrl()].avatar}/>);
+                                                                                      avatar={props.state.dialogs[GetUserUrl()].avatar}
+                                                                                      myAvatar={props.myAvatar}/>);
 
     let newMessage = () => {
         let idDialog = GetUserUrl();
@@ -32,6 +33,12 @@ const Dialogs = (props) => {
         props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
+    let onKeyDown = (e) => {
+        if (e.keyCode === 13 && e.ctrlKey === true) {
+            newMessage();
+        }
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -42,7 +49,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.newMessage}>
                 <div>
-                    <textarea placeholder='Enter your message' onChange={onMessageChange}
+                    <textarea placeholder='Enter your message' onKeyDown={(e) => onKeyDown(e)}
+                              onChange={onMessageChange}
                               value={props.state.newMessageText}/>
                 </div>
                 <div>

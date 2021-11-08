@@ -10,7 +10,8 @@ let store = {
                 {id: 2, message: 'It\'s my first post', likesCount: 31},
                 {id: 3, message: 'ITK', likesCount: 11}
             ],
-            newPostText: ''
+            newPostText: '',
+            myAvatar: 'http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg'
         },
         dialogsPage: {
             dialogs: [

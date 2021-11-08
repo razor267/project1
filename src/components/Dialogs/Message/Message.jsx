@@ -7,7 +7,7 @@ const Message = (props) => {
     if (props.iOrNot == true) {
         return (
             <div className={s.message}>
-                <div className={s.i}>{props.message}<img src='http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg'/></div>
+                <div className={s.i}>{props.message}<img src={props.myAvatar}/></div>
             </div>
         )
     } else {
