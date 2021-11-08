@@ -2,7 +2,6 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {newMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/gialogsReducer";
 
 function GetUserUrl() {
 
@@ -15,22 +14,21 @@ function GetUserUrl() {
 }
 
 const Dialogs = (props) => {
-
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
-    let messagesElements = props.state.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
+    let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
+    let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
                                                                                       iOrNot={m.iOrNot}
-                                                                                      avatar={props.state.dialogs[GetUserUrl()].avatar}
+                                                                                      avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
                                                                                       myAvatar={props.myAvatar}/>);
 
     let newMessage = () => {
         let idDialog = GetUserUrl();
-        let idMessage = props.state.dialogs[idDialog].dialog.length + 1
-        props.dispatch(newMessageActionCreator(idMessage, idDialog));
+        let idMessage = props.dialogs.dialogs[idDialog].dialog.length + 1
+        props.newMessage(idMessage, idDialog);
     }
 
     let onMessageChange = (e) => {
         let text = e.target.value;
-        props.dispatch(updateNewMessageTextActionCreator(text));
+        props.updateNewMessageText(text);
     }
 
     let onKeyDown = (e) => {
@@ -51,7 +49,7 @@ const Dialogs = (props) => {
                 <div>
                     <textarea placeholder='Enter your message' onKeyDown={(e) => onKeyDown(e)}
                               onChange={onMessageChange}
-                              value={props.state.newMessageText}/>
+                              value={props.dialogs.newMessageText}/>
                 </div>
                 <div>
                     <button onClick={newMessage}>Add post</button>
