@@ -14,6 +14,7 @@ function GetUserUrl() {
 }
 
 const Dialogs = (props) => {
+
     let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
     let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
                                                                                       iOrNot={m.iOrNot}

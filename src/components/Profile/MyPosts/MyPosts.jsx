@@ -3,14 +3,13 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-
-    let postsElements = props.posts.posts.map(p => <Post myAvatar={props.posts.myAvatar} message={p.message}
+    let postsElements = props.state.posts.map(p => <Post myAvatar={props.state.myAvatar} message={p.message}
                                                          likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        let newElementArrayId = props.posts.posts.length + 1;
+        let newElementArrayId = props.state.posts.length + 1;
         props.addPost(newElementArrayId);
     }
 
@@ -31,7 +30,7 @@ const MyPosts = (props) => {
             <div>
                 <div>
                     <textarea placeholder='Enter your message' onKeyDown={(e) => onKeyDown(e)} onChange={onPostChange}
-                              ref={newPostElement} value={props.posts.newPostText}/>
+                              ref={newPostElement} value={props.state.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
