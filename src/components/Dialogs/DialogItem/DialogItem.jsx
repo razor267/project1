@@ -1,6 +1,7 @@
 import React from "react";
 import s from './DialogItem.module.css';
 import {NavLink} from "react-router-dom";
+import {updatePageDialogs} from "../Dialogs";
 
 const DialogItem = (props) => {
 
@@ -8,7 +9,7 @@ const DialogItem = (props) => {
 
     return (
         <div className={s.dialog}>
-            <NavLink to={path}><img src={props.avatar}/>{props.name}</NavLink>
+            <NavLink to={path} onClick={()=>{updatePageDialogs(props.id)}} activeClassName={s.activeLink}><img src={props.avatar}/>{props.name}</NavLink>
         </div>
     )
 }

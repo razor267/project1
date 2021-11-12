@@ -4,7 +4,6 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 function GetUserUrl() {
-
     let url = window.location.href;
     let res;
 
@@ -13,13 +12,17 @@ function GetUserUrl() {
     return res
 }
 
-const Dialogs = (props) => {
+export let updatePageDialogs = (id) => {
+    // alert(id);
+}
 
+const Dialogs = (props) => {
+    // alert(')))))')
     let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
     let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
-                                                                                      iOrNot={m.iOrNot}
-                                                                                      avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
-                                                                                      myAvatar={props.myAvatar}/>);
+                                                                                        iOrNot={m.iOrNot}
+                                                                                        avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
+                                                                                        myAvatar={props.myAvatar}/>);
 
     let newMessage = () => {
         let idDialog = GetUserUrl();
