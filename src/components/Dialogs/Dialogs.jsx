@@ -12,12 +12,7 @@ function GetUserUrl() {
     return res
 }
 
-export let updatePageDialogs = (id) => {
-    // alert(id);
-}
-
 const Dialogs = (props) => {
-    // alert(')))))')
     let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
     let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
                                                                                         iOrNot={m.iOrNot}
@@ -43,7 +38,7 @@ const Dialogs = (props) => {
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+            <div className={s.dialogsItems} onClick={onMessageChange}>
                 {dialogsElements}
             </div>
             <div className={s.messages}>
