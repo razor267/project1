@@ -1,10 +1,15 @@
+import {act} from "@testing-library/react";
+
 const NEW_MESSAGE = 'NEW-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
     dialogs: [
         {
-            id: 1, name: 'Petr', avatar: 'https://topmsg.ru/wp-content/uploads/anonymous.jpg', dialog:
+            id: 1,
+            name: 'Petr',
+            avatar: 'https://topmsg.ru/wp-content/uploads/anonymous.jpg',
+            dialog:
                 [
                     {id: 1, message: 'Hi', iOrNot: true},
                     {id: 2, message: 'Hi=))', iOrNot: false},
@@ -75,6 +80,9 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
+
+    let stateCopy;
+
     switch (action.type) {
         case NEW_MESSAGE: {
             let newMessage = {
@@ -82,15 +90,16 @@ const dialogsReducer = (state = initialState, action) => {
                 message: state.newMessageText,
                 iOrNot: true
             };
-            let stateCopy = {...state};
-            stateCopy.dialogs[action.idDialog].dialog = [...state.dialogs[action.idDialog].dialog];
+            // stateCopy = {...state, newMessageText: ''};
+            // stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
+            let stateCopy = JSON.parse(JSON.stringify(state));
+            stateCopy.newMessageText='';
             stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
-            stateCopy.newMessageText = '';
+            debugger;
             return stateCopy;
         }
         case UPDATE_NEW_MESSAGE_TEXT: {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.newText;
+            stateCopy = {...state, newMessageText: action.newText};
             return stateCopy;
         }
         default:

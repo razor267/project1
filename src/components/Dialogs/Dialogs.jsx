@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import Post from "../Profile/MyPosts/Post/Post";
 
 function GetUserUrl() {
     let url = window.location.href;
@@ -13,11 +14,11 @@ function GetUserUrl() {
 }
 
 const Dialogs = (props) => {
-    let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>);
+    let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} key={d.id}/>);
     let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
                                                                                         iOrNot={m.iOrNot}
                                                                                         avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
-                                                                                        myAvatar={props.myAvatar}/>);
+                                                                                        myAvatar={props.myAvatar} key={m.id}/>);
 
     let newMessage = () => {
         let idDialog = GetUserUrl();
@@ -35,7 +36,6 @@ const Dialogs = (props) => {
             newMessage();
         }
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems} onClick={onMessageChange}>

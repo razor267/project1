@@ -1,5 +1,5 @@
 import profileReducer from "./profileReducer";
-import dialogsReducer from "./gialogsReducer";
+import dialogsReducer from "./dialogsReducer";
 import navBarReducer from "./navBarReducer";
 
 let store = {
