@@ -2,20 +2,18 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import Post from "../Profile/MyPosts/Post/Post";
 
-function GetUserUrl() {
+function GetUserUrl(length) {
     let url = window.location.href;
     let res;
-
-    url[url.length - 1] <= 6 ? res = url[url.length - 1] - 1 : res = 0;
+    url[url.length - 1] <= length ? res = url[url.length - 1] - 1 : res = 0;
 
     return res
 }
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} key={d.id}/>);
-    let messagesElements = props.dialogs.dialogs[GetUserUrl()].dialog.map(m => <Message message={m.message}
+    let messagesElements = props.dialogs.dialogs[GetUserUrl(props.dialogs.dialogs.length)].dialog.map(m => <Message message={m.message}
                                                                                         iOrNot={m.iOrNot}
                                                                                         avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
                                                                                         myAvatar={props.myAvatar} key={m.id}/>);
