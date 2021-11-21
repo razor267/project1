@@ -1,7 +1,6 @@
-import {act} from "@testing-library/react";
-
 const NEW_MESSAGE = 'NEW-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SET_CURRENT_DIALOG = 'SET_CURRENT_DIALOG';
 
 let initialState = {
     dialogs: [
@@ -76,7 +75,8 @@ let initialState = {
                 ]
         }
     ],
-    newMessageText: ''
+    newMessageText: '',
+    currentDialog: null
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -93,13 +93,17 @@ const dialogsReducer = (state = initialState, action) => {
             // stateCopy = {...state, newMessageText: ''};
             // stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
             let stateCopy = JSON.parse(JSON.stringify(state));
-            stateCopy.newMessageText='';
+            stateCopy.newMessageText = '';
             stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
             debugger;
             return stateCopy;
         }
         case UPDATE_NEW_MESSAGE_TEXT: {
             stateCopy = {...state, newMessageText: action.newText};
+            return stateCopy;
+        }
+        case SET_CURRENT_DIALOG: {
+            stateCopy = {...state, currentDialog: action.currentDialog};
             return stateCopy;
         }
         default:
@@ -114,5 +118,6 @@ export const newMessageActionCreator = (idMessage, idDialog) => ({
     idDialog: idDialog
 });
 export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
+export const setCurrentDialogActionCreator = (currentDialog) => ({type: SET_CURRENT_DIALOG, currentDialog})
 
 export default dialogsReducer;
