@@ -1,6 +1,6 @@
 import React from "react";
-import styles from './Users.module.css'
-import userPhoto from '../../assets/images/avatar.jpg'
+import styles from './Users.module.css';
+import userPhoto from '../../assets/images/avatar.jpg';
 
 let Users = (props) => {
 
