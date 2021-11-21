@@ -7,7 +7,6 @@ function GetUserUrl(length) {
     let url = window.location.href;
     let res;
     url[url.length - 1] <= length ? res = url[url.length - 1] - 1 : res = 0;
-
     return res
 }
 
@@ -15,12 +14,13 @@ const Dialogs = (props) => {
     let dialogsElements = props.dialogs.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} key={d.id}/>);
     let messagesElements = props.dialogs.dialogs[GetUserUrl(props.dialogs.dialogs.length)].dialog.map(m => <Message message={m.message}
                                                                                         iOrNot={m.iOrNot}
-                                                                                        avatar={props.dialogs.dialogs[GetUserUrl()].avatar}
+                                                                                        avatar={props.dialogs.dialogs[GetUserUrl(props.dialogs.dialogs.length)].avatar}
                                                                                         myAvatar={props.myAvatar} key={m.id}/>);
 
     let newMessage = () => {
-        let idDialog = GetUserUrl();
+        let idDialog = GetUserUrl(props.dialogs.dialogs.length);
         let idMessage = props.dialogs.dialogs[idDialog].dialog.length + 1
+        debugger;
         props.newMessage(idMessage, idDialog);
     }
 
