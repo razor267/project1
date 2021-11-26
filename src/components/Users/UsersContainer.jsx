@@ -1,35 +1,23 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowUnfollowInProgress,
-    toggleIsFetching,
-    unfollow
-} from "../../redux/usersReducer";
+import {follow, getUsers, toggleFollowUnfollowInProgress, unfollow} from "../../redux/usersReducer";
 import Users from "./Users";
 import Loading from "../common/loading/loading";
-import {usersAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
+        this.props.getUsers(pageNumber, this.props.pageSize);
+        /*this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true);
         usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(data.items);
-        })
+        })*/
     }
 
     render() {
@@ -43,7 +31,7 @@ class UsersAPIComponent extends React.Component {
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
                    followUnfollowInProgress={this.props.followUnfollowInProgress}
-                   toggleFollowUnfollowInProgress={this.props.toggleFollowUnfollowInProgress}
+                   // toggleFollowUnfollowInProgress={this.props.toggleFollowUnfollowInProgress}
             />
         </>
     }
@@ -88,9 +76,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-    toggleFollowUnfollowInProgress
+    // setCurrentPage,
+    toggleFollowUnfollowInProgress,
+    getUsers
 })(UsersAPIComponent)

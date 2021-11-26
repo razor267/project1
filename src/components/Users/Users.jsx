@@ -2,7 +2,6 @@ import React from "react";
 import styles from './Users.module.css';
 import userPhoto from '../../assets/images/avatar.jpg';
 import {NavLink} from "react-router-dom";
-import {followUnfollowAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -35,22 +34,24 @@ let Users = (props) => {
                 <div>
                     {u.followed
                         ? <button disabled={props.followUnfollowInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFollowUnfollowInProgress(true, u.id);
-                            followUnfollowAPI.unfollow(u.id).then(data => {
+                            props.unfollow(u.id);
+                            /*props.toggleFollowUnfollowInProgress(true, u.id);
+                            usersAPI.unfollow(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
                                 props.toggleFollowUnfollowInProgress(false, u.id);
-                            })
+                            })*/
                         }}>Unfollow</button>
                         : <button disabled={props.followUnfollowInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFollowUnfollowInProgress(true, u.id);
-                            followUnfollowAPI.follow(u.id).then(data => {
+                            props.follow(u.id);
+                            /*props.toggleFollowUnfollowInProgress(true, u.id);
+                            usersAPI.follow(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
                                 props.toggleFollowUnfollowInProgress(false, u.id);
-                            })
+                            })*/
                         }}>Follow</button>}
                 </div>
             </span>
