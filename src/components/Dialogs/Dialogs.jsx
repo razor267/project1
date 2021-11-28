@@ -6,7 +6,6 @@ import Login from "../Login/Login";
 import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
-    debugger
     let dialogId = props.currentDialog;
     let currentDialog = dialogId - 1
 
