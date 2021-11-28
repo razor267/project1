@@ -19,7 +19,8 @@ let mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage,
         myAvatar: state.profilePage.myAvatar,
-        currentDialog: state.dialogsPage.currentDialog
+        currentDialog: state.dialogsPage.currentDialog,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch) => {

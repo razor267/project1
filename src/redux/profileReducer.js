@@ -41,13 +41,11 @@ export const addPostActionCreator = (newElementArrayId) => ({type: ADD_POST, id:
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
-export const getProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response));
-            })
-    }
+export const getUserProfile = (userId) => (dispatch) => {
+    profileAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response));
+        })
 }
 
 export default profileReducer;
