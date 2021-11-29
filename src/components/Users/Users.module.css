@@ -6,3 +6,12 @@
 .selectedPage {
     font-weight: bold;
 }
+
+.pagination {
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination .cursor {
+    cursor: default ;
+}

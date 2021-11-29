@@ -3,7 +3,7 @@ import styles from './Users.module.css';
 import userPhoto from '../../assets/images/avatar.jpg';
 import {NavLink} from "react-router-dom";
 
-let Users = (props) => {
+let UsersOld = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -13,38 +13,14 @@ let Users = (props) => {
         pages.push(i)
     }
 
-    let FirstPages = () => {
-        return (
-            <>
-                {props.currentPage != 1 && <span onClick={(e) => {
-                    props.onPageChanged(props.currentPage - 1)
-                }}>{'< '}</span>}
-                {props.currentPage > 5 &&
-                <span onClick={(e) => {
-                    props.onPageChanged(1)
-                }}>1</span>
-                }
-                {props.currentPage > 5 && <span className={styles.cursor}>......</span>}
-            </>
-        )
-    }
-
-    let LastsPages = () => {
-        return (
-            <>
-                {pagesCount - props.currentPage >= 5 && <span className={styles.cursor}>......</span>}
-                {pagesCount - props.currentPage >= 5 && <span onClick={(e) => {
-                    props.onPageChanged(pagesCount)
-                }}>{pagesCount}</span>}
-
-                {props.currentPage != pagesCount && <span onClick={(e) => {
-                    props.onPageChanged(props.currentPage + 1)
-                }}> ></span>}
-            </>
-        )
-    }
-
     return <div>
+        <div>
+            {pages.map(p => {
+                return <span className={props.currentPage === p && styles.selectedPage} onClick={(e) => {
+                    props.onPageChanged(p)
+                }}>{p} </span>
+            })}
+        </div>
         {
             props.users.map(u => <div key={u.id}>
             <span>
@@ -91,21 +67,8 @@ let Users = (props) => {
                 </span>
             </div>)
         }
-        <div className={styles.pagination}>
-            <FirstPages/>
-            {pages.map(p => {
-                if (props.currentPage - p <= 4 && props.currentPage - p >= -4) {
-                    return (
-                        <span className={props.currentPage === p && styles.selectedPage} onClick={(e) => {
-                            props.onPageChanged(p)
-                        }}>{p + ' | '}
-                    </span>
-                    )
-                }
-            })}
-            <LastsPages/>
-        </div>
     </div>
 }
 
-export default Users;
+
+export default UsersOld;

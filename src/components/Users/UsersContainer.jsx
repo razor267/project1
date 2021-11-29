@@ -1,10 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {follow, getUsers, toggleFollowUnfollowInProgress, unfollow} from "../../redux/usersReducer";
-import Users from "./Users";
 import Loading from "../common/loading/loading";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import Users from "./Users";
 
 class UsersAPIComponent extends React.Component {
 
