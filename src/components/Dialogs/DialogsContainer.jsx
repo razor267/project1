@@ -1,8 +1,7 @@
 import React from "react";
 import {
     newMessageActionCreator,
-    setCurrentDialogActionCreator,
-    updateNewMessageTextActionCreator
+    setCurrentDialogActionCreator
 } from "../../redux/dialogsReducer";
 import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
@@ -26,11 +25,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        newMessage: (idMessage, idDialog) => {
-            dispatch(newMessageActionCreator(idMessage, idDialog));
-        },
-        updateNewMessageText: (text) => {
-            dispatch(updateNewMessageTextActionCreator(text));
+        newMessage: (idMessage, idDialog, message_area) => {
+            dispatch(newMessageActionCreator(idMessage, idDialog, message_area));
         },
         setCurrentDialog: (currentDialog) => {
             dispatch(setCurrentDialogActionCreator(currentDialog));

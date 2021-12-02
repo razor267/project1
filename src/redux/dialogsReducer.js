@@ -1,5 +1,4 @@
 const NEW_MESSAGE = 'NEW-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const SET_CURRENT_DIALOG = 'SET_CURRENT_DIALOG';
 
 let initialState = {
@@ -75,7 +74,6 @@ let initialState = {
                 ]
         }
     ],
-    newMessageText: '',
     currentDialog: null
 };
 
@@ -87,19 +85,14 @@ const dialogsReducer = (state = initialState, action) => {
         case NEW_MESSAGE: {
             let newMessage = {
                 id: action.idMessage,
-                message: state.newMessageText,
+                // message: state.newMessageText,
+                message: action.message_area,
                 iOrNot: true
             };
             // stateCopy = {...state, newMessageText: ''};
             // stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
             let stateCopy = JSON.parse(JSON.stringify(state));
-            stateCopy.newMessageText = '';
             stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
-            debugger;
-            return stateCopy;
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            stateCopy = {...state, newMessageText: action.newText};
             return stateCopy;
         }
         case SET_CURRENT_DIALOG: {
@@ -111,13 +104,13 @@ const dialogsReducer = (state = initialState, action) => {
     }
 
 }
-
-export const newMessageActionCreator = (idMessage, idDialog) => ({
+export const newMessageActionCreator = (idMessage, idDialog, message_area) => ({
     type: NEW_MESSAGE,
     idMessage: idMessage,
-    idDialog: idDialog
-});
-export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
+    idDialog: idDialog,
+    message_area
+}
+);
 export const setCurrentDialogActionCreator = (currentDialog) => ({type: SET_CURRENT_DIALOG, currentDialog})
 
 export default dialogsReducer;
