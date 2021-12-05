@@ -85,7 +85,7 @@ export default withAuthRedirect(connect(mapStateToProps, {
 })(UsersAPIComponent))*/
 
 export default compose(
-    withAuthRedirect,
+    // withAuthRedirect,
     connect(mapStateToProps, {
         follow,
         unfollow,
