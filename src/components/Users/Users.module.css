@@ -2,16 +2,3 @@
     width: 100px;
     height: 100px;
 }
-
-.selectedPage {
-    font-weight: bold;
-}
-
-.pagination {
-    text-align: center;
-    cursor: pointer;
-}
-
-.pagination .cursor {
-    cursor: default ;
-}
