@@ -1,11 +1,10 @@
 import React from "react";
 import styles from './Users.module.css';
-import userPhoto from '../../assets/images/avatar.jpg';
-import {NavLink} from "react-router-dom";
+import User from "./User";
 
-let Users = (props) => {
+let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
     let pages = [];
 
@@ -16,15 +15,15 @@ let Users = (props) => {
     let FirstPages = () => {
         return (
             <>
-                {props.currentPage != 1 && <span onClick={(e) => {
-                    props.onPageChanged(props.currentPage - 1)
+                {currentPage != 1 && <span onClick={(e) => {
+                    onPageChanged(currentPage - 1)
                 }}>{'< '}</span>}
-                {props.currentPage > 5 &&
+                {currentPage > 5 &&
                 <span onClick={(e) => {
-                    props.onPageChanged(1)
+                    onPageChanged(1)
                 }}>1</span>
                 }
-                {props.currentPage > 5 && <span className={styles.cursor}>......</span>}
+                {currentPage > 5 && <span className={styles.cursor}>......</span>}
             </>
         )
     }
@@ -32,13 +31,13 @@ let Users = (props) => {
     let LastsPages = () => {
         return (
             <>
-                {pagesCount - props.currentPage >= 5 && <span className={styles.cursor}>......</span>}
-                {pagesCount - props.currentPage >= 5 && <span onClick={(e) => {
-                    props.onPageChanged(pagesCount)
+                {pagesCount - currentPage >= 5 && <span className={styles.cursor}>......</span>}
+                {pagesCount - currentPage >= 5 && <span onClick={(e) => {
+                    onPageChanged(pagesCount)
                 }}>{pagesCount}</span>}
 
-                {props.currentPage != pagesCount && <span onClick={(e) => {
-                    props.onPageChanged(props.currentPage + 1)
+                {currentPage != pagesCount && <span onClick={(e) => {
+                    onPageChanged(currentPage + 1)
                 }}> ></span>}
             </>
         )
@@ -46,58 +45,19 @@ let Users = (props) => {
 
     return <div>
         {
-            props.users.map(u => <div key={u.id}>
-            <span>
-                <div>
-                    <NavLink to={'/profile/' + u.id}>
-                        <img
-                            src={u.photos.small != null ? u.photos.small : userPhoto}
-                            className={styles.userPhoto}/>
-                    </NavLink>
-                </div>
-                <div>
-                    {u.followed
-                        ? <button disabled={props.followUnfollowInProgress.some(id => id === u.id)} onClick={() => {
-                            props.unfollow(u.id);
-                            /*props.toggleFollowUnfollowInProgress(true, u.id);
-                            usersAPI.unfollow(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                }
-                                props.toggleFollowUnfollowInProgress(false, u.id);
-                            })*/
-                        }}>Unfollow</button>
-                        : <button disabled={props.followUnfollowInProgress.some(id => id === u.id)} onClick={() => {
-                            props.follow(u.id);
-                            /*props.toggleFollowUnfollowInProgress(true, u.id);
-                            usersAPI.follow(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.follow(u.id)
-                                }
-                                props.toggleFollowUnfollowInProgress(false, u.id);
-                            })*/
-                        }}>Follow</button>}
-                </div>
-            </span>
-                <span>
-                    <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span>
-                    <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
-                </span>
-            </div>)
+            users.map(u => <User user={u}
+                                 followUnfollowInProgress={props.followUnfollowInProgress}
+                                 follow={props.follow}
+                                 unfollow={props.unfollow}
+                                 key={u.id}/>)
         }
         <div className={styles.pagination}>
             <FirstPages/>
             {pages.map(p => {
-                if (props.currentPage - p <= 4 && props.currentPage - p >= -4) {
+                if (currentPage - p <= 4 && currentPage - p >= -4) {
                     return (
-                        <span className={props.currentPage === p && styles.selectedPage} onClick={(e) => {
-                            props.onPageChanged(p)
+                        <span className={currentPage === p && styles.selectedPage} onClick={(e) => {
+                            onPageChanged(p)
                         }}>{p + ' | '}
                     </span>
                     )

@@ -16,17 +16,13 @@ import {
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+        const {currentPage,pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize);
-        /*this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true);
-        usersAPI.requestUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-        })*/
+        const {pageSize} = this.props;
+        this.props.requestUsers(pageNumber, pageSize);
     }
 
     render() {
@@ -40,26 +36,13 @@ class UsersAPIComponent extends React.Component {
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
                    followUnfollowInProgress={this.props.followUnfollowInProgress}
-                // toggleFollowUnfollowInProgress={this.props.toggleFollowUnfollowInProgress}
             />
         </>
     }
 }
 
-/*let mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followUnfollowInProgress: state.usersPage.followUnfollowInProgress
-    }
-}*/
-
 let mapStateToProps = (state) => {
     return {
-        // users: getUsers(state),
         users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
