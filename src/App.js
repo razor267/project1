@@ -13,7 +13,7 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Loading from "./components/common/loading/loading";
 import store from "./redux/reduxStore";
-import {withSuspense} from "./hoc/withAuthSusoense";
+import {withSuspense} from "./hoc/withSuspense";
 
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
