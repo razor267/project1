@@ -5,9 +5,7 @@ import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -15,6 +13,13 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import Loading from "./components/common/loading/loading";
 import store from "./redux/reduxStore";
+import {withSuspense} from "./hoc/withAuthSusoense";
+
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
 
@@ -32,8 +37,10 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <NavBar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <React.Suspense fallback={<div><Loading/></div>}>
+                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    </React.Suspense>
+                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
