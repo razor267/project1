@@ -18,8 +18,8 @@ class DialogsContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
+        profile: state.profilePage.profile,
         dialogs: state.dialogsPage,
-        myAvatar: state.profilePage.myAvatar,
         currentDialog: state.dialogsPage.currentDialog
     }
 }

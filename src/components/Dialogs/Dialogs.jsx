@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
+import userPhoto from "../../assets/images/avatar.jpg";
 
 const Dialogs = (props) => {
 
@@ -27,7 +28,6 @@ const Dialogs = (props) => {
 
     if (props.isAuth === false) return <Redirect to={'/login'}/>;
 
-
     if (!dialogId) {
         return (
             <div className={s.dialogs}>
@@ -41,7 +41,7 @@ const Dialogs = (props) => {
         message={m.message}
         iOrNot={m.iOrNot}
         avatar={props.dialogs.dialogs[currentDialog].avatar}
-        myAvatar={props.myAvatar} key={m.id}/>);
+        myAvatar={props.profile === null ? userPhoto : props.profile.photos.large} key={m.id}/>);
 
     return (
         <div className={s.dialogs}>

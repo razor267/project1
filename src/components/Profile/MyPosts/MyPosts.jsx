@@ -8,9 +8,13 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 const maxLength10 = maxLengthCreator(10)
 
 const MyPosts = (props) => {
+    if (!props.state.profile) {
+        return null
+    }
+
     let postsElements = [...props.state.posts]
         .reverse()
-        .map(p => <Post myAvatar={props.state.myAvatar} message={p.message}
+        .map(p => <Post myAvatar={props.state.profile.photos.large} message={p.message}
                         likesCount={p.likesCount} key={p.id}/>);
 
     let addPost = (values) => {
