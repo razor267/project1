@@ -1,13 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./ProfileInfo.module.css";
 import Loading from "../../common/loading/loading";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/avatar.jpg";
 import ProfileDataForm from "./ProfileDataForm";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
-
-    let [editMode, setEditMode] = useState(false);
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, editMode, setEditMode}) => {
+    // let [editMode, setEditMode] = useState(false);
 
     if (!profile) {
         return <Loading/>
@@ -21,7 +20,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
 
     const onSubmit = (formData) => {
         saveProfile(formData).then(() => {
-            setEditMode(false);
+            // setEditMode(false);
         })
     }
 

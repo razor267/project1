@@ -11,6 +11,8 @@ const Profile = (props) => {
                          isOwner={props.isOwner}
                          savePhoto={props.savePhoto}
                          saveProfile={props.saveProfile}
+                         editMode={props.editMode}
+                         setEditMode={props.setEditMode}
             />
             <MyPostsContainer/>
         </div>

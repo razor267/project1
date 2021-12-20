@@ -6,6 +6,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const SET_EDIT_MODE = 'SET_EDIT_MODE';
 
 let initialState = {
     posts: [
@@ -15,7 +16,8 @@ let initialState = {
     ],
     myAvatar: 'http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg',
     profile: null,
-    status: ""
+    status: "",
+    editMode: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -41,6 +43,9 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_PHOTO_SUCCESS: {
             return {...state, profile: {...state.profile, photos: action.photos}};
         }
+        case SET_EDIT_MODE: {
+            return {...state, editMode: action.editMode};
+        }
         default:
             return state;
     }
@@ -55,6 +60,7 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+export const setEditMode = (editMode) => ({type: SET_EDIT_MODE, editMode});
 
 export const getUserProfile = (userId) => async (dispatch) => {
     let response = await profileAPI.getProfile(userId);
@@ -89,15 +95,20 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     const response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(userId));
+        dispatch(setEditMode(false));
     } else {
 
-/*        const key = response.data.messages[0].match(/Contacts->(\w+)/)[1].toLowerCase();
-        dispatch(stopSubmit('edit-profile', {
-            contacts: {[key]: response.data.messages[0]},
-        }));*/
+        let errorMessagePart = "";
 
-        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}));
-        return Promise.reject(response.data.messages[0]);
+        for (let i = 0; i < response.data.messages.length; i++) {
+            errorMessagePart = response.data.messages[i].split('>').pop().split(')').shift().toLowerCase();
+            dispatch(stopSubmit('edit-profile', {
+                contacts: {[errorMessagePart]: response.data.messages[i]},
+            }));
+        }
+
+        // dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}));
+        // return Promise.reject(response.data.messages[0]);
         // dispatch(stopSubmit('edit-profile', {"contacts": {"facebook": response.data.messages[0]}}));
     }
 }
