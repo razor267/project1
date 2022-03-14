@@ -1,6 +1,12 @@
 const NEW_MESSAGE = 'NEW-MESSAGE';
 const SET_CURRENT_DIALOG = 'SET_CURRENT_DIALOG';
 
+type DialogType = {
+    id: number
+    message: string
+    iOrNot: boolean
+}
+
 let initialState = {
     dialogs: [
         {
@@ -15,7 +21,7 @@ let initialState = {
                     {id: 4, message: '???', iOrNot: true},
                     {id: 5, message: 'good, and you?', iOrNot: false},
                     {id: 6, message: 'too', iOrNot: true}
-                ]
+                ] as Array<DialogType>
         },
         {
             id: 2,
@@ -25,7 +31,7 @@ let initialState = {
                 [
                     {id: 1, message: 'Hello', iOrNot: false},
                     {id: 2, message: 'hi, man', iOrNot: true}
-                ]
+                ] as Array<DialogType>
         },
         {
             id: 3,
@@ -36,7 +42,7 @@ let initialState = {
                     {id: 1, message: 'How are you??', iOrNot: false},
                     {id: 2, message: 'good, you?', iOrNot: true},
                     {id: 3, message: 'too=))', iOrNot: false}
-                ]
+                ] as Array<DialogType>
         },
         {
             id: 4,
@@ -46,7 +52,7 @@ let initialState = {
                 [
                     {id: 1, message: 'Hi, sister', iOrNot: true},
                     {id: 2, message: 'Hi, bro', iOrNot: false}
-                ]
+                ] as Array<DialogType>
         },
         {
             id: 5,
@@ -58,7 +64,7 @@ let initialState = {
                     {id: 2, message: 'Hi', iOrNot: false},
                     {id: 3, message: 'what you do?', iOrNot: true},
                     {id: 4, message: 'watch TV=))', iOrNot: false}
-                ]
+                ] as Array<DialogType>
         },
         {
             id: 6,
@@ -71,13 +77,15 @@ let initialState = {
                     {id: 3, message: 'go????', iOrNot: false},
                     {id: 4, message: '???', iOrNot: false},
                     {id: 5, message: 'go', iOrNot: true}
-                ]
+                ] as Array<DialogType>
         }
     ],
     currentDialog: null
 };
 
-const dialogsReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const dialogsReducer = (state = initialState, action: any): InitialStateType => {
 
     let stateCopy;
 
@@ -104,13 +112,27 @@ const dialogsReducer = (state = initialState, action) => {
     }
 
 }
-export const newMessageActionCreator = (idMessage, idDialog, message_area) => ({
-    type: NEW_MESSAGE,
-    idMessage: idMessage,
-    idDialog: idDialog,
-    message_area
+
+type NewMessageActionCreatorType = {
+    type: typeof NEW_MESSAGE,
+    idMessage: number,
+    idDialog: number,
+    message_area: any
 }
+
+export const newMessageActionCreator = (idMessage: number, idDialog: number, message_area: any): NewMessageActionCreatorType => ({
+        type: NEW_MESSAGE,
+        idMessage: idMessage,
+        idDialog: idDialog,
+        message_area
+    }
 );
-export const setCurrentDialogActionCreator = (currentDialog) => ({type: SET_CURRENT_DIALOG, currentDialog})
+
+type SetCurrentDialogActionCreatorType = {
+    type: typeof SET_CURRENT_DIALOG
+    currentDialog: number
+}
+
+export const setCurrentDialogActionCreator = (currentDialog:number):SetCurrentDialogActionCreatorType => ({type: SET_CURRENT_DIALOG, currentDialog})
 
 export default dialogsReducer;
