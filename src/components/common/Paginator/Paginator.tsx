@@ -1,10 +1,17 @@
 import React from "react";
 import styles from './Paginator.module.css';
 
-let Paginator = ({currentPage, totalUsersCount, pageSize, onPageChanged}) => {
+type PropsType = {
+    currentPage: number
+    totalUsersCount: number
+    pageSize: number
+    onPageChanged: (pageNumber: number) => void
+}
+
+let Paginator: React.FC<PropsType> = ({currentPage, totalUsersCount, pageSize, onPageChanged}) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
-    let pages = [];
+    let pages: Array<number> = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -36,25 +43,26 @@ let Paginator = ({currentPage, totalUsersCount, pageSize, onPageChanged}) => {
 
                 {currentPage != pagesCount && <span onClick={(e) => {
                     onPageChanged(currentPage + 1)
-                }}> ></span>}
+                }}>{' >'}</span>}
             </>
         )
     }
 
     return <div className={styles.pagination}>
-            <FirstPages/>
-            {pages.map(p => {
-                if (currentPage - p <= 4 && currentPage - p >= -4) {
-                    return (
-                        <span className={currentPage === p && styles.selectedPage} onClick={(e) => {
-                            onPageChanged(p)
-                        }}>{p + ' | '}
+        <FirstPages/>
+        {pages.map(p => {
+            if (currentPage - p <= 4 && currentPage - p >= -4) {
+                return (
+                    // <span className={currentPage === p && styles.selectedPage} onClick={(e) => {
+                    <span className={styles.selectedPage} onClick={(e) => {
+                        onPageChanged(p)
+                    }}>{p + ' | '}
                     </span>
-                    )
-                }
-            })}
-            <LastsPages/>
-        </div>
+                )
+            }
+        })}
+        <LastsPages/>
+    </div>
 }
 
 export default Paginator;
