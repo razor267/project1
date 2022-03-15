@@ -1,12 +1,13 @@
-import React from "react";
+import React, {HTMLAttributes} from "react";
 import styles from './Paginator.module.css';
+import cn from 'classnames';
 
 type PropsType = {
     currentPage: number
     totalUsersCount: number
     pageSize: number
     onPageChanged: (pageNumber: number) => void
-}
+} & React.DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 
 let Paginator: React.FC<PropsType> = ({currentPage, totalUsersCount, pageSize, onPageChanged}) => {
 
@@ -53,10 +54,13 @@ let Paginator: React.FC<PropsType> = ({currentPage, totalUsersCount, pageSize, o
         {pages.map(p => {
             if (currentPage - p <= 4 && currentPage - p >= -4) {
                 return (
-                    // <span className={currentPage === p && styles.selectedPage} onClick={(e) => {
-                    <span className={styles.selectedPage} onClick={(e) => {
-                        onPageChanged(p)
-                    }}>{p + ' | '}
+                    <span
+                        className={cn({[styles.selectedPage]: currentPage === p})}
+                        key={p}
+                        onClick={(e) => {
+                            // <span className={styles.selectedPage} onClick={(e) => {
+                            onPageChanged(p)
+                        }}>{p + ' | '}
                     </span>
                 )
             }
