@@ -35,3 +35,5 @@ export type UserType = {
     status: string
     photos: PhotosType
 }
+
+

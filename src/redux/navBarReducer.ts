@@ -1,3 +1,6 @@
+import {InferActionsTypes} from "./reduxStore";
+import {actions} from "./profileReducer";
+
 type ProfileType = {
     name: string
     avatar: string
@@ -10,8 +13,9 @@ let initialState = [
 ] as Array<ProfileType>;
 
 export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>;
 
-const navBarReducer = (state = initialState, action: any): InitialStateType => {
+const navBarReducer = (state = initialState, action: ActionsType): InitialStateType => {
     return state;
 }
 

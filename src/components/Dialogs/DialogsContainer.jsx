@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    newMessageActionCreator,
-    setCurrentDialogActionCreator
-} from "../../redux/dialogsReducer";
+import {actions} from "../../redux/dialogsReducer";
 import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -26,10 +23,10 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         newMessage: (idMessage, idDialog, message_area) => {
-            dispatch(newMessageActionCreator(idMessage, idDialog, message_area));
+            dispatch(actions.newMessageActionCreator(idMessage, idDialog, message_area));
         },
         setCurrentDialog: (currentDialog) => {
-            dispatch(setCurrentDialogActionCreator(currentDialog));
+            dispatch(actions.setCurrentDialogActionCreator(currentDialog));
         }
     }
 }

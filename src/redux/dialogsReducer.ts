@@ -1,5 +1,4 @@
-const NEW_MESSAGE = 'NEW-MESSAGE';
-const SET_CURRENT_DIALOG = 'SET_CURRENT_DIALOG';
+import {InferActionsTypes} from "./reduxStore";
 
 type DialogType = {
     id: number
@@ -80,17 +79,18 @@ let initialState = {
                 ] as Array<DialogType>
         }
     ],
-    currentDialog: null
+    currentDialog: 0
 };
 
 export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>;
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
     let stateCopy;
 
     switch (action.type) {
-        case NEW_MESSAGE: {
+        case 'SN/DIALOGS/NEW-MESSAGE': {
             let newMessage = {
                 id: action.idMessage,
                 // message: state.newMessageText,
@@ -103,7 +103,7 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
             stateCopy.dialogs[action.idDialog].dialog.push(newMessage);
             return stateCopy;
         }
-        case SET_CURRENT_DIALOG: {
+        case 'SN/DIALOGS/SET_CURRENT_DIALOG': {
             stateCopy = {...state, currentDialog: action.currentDialog};
             return stateCopy;
         }
@@ -113,26 +113,16 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
 
 }
 
-type NewMessageActionCreatorType = {
-    type: typeof NEW_MESSAGE,
-    idMessage: number,
-    idDialog: number,
-    message_area: any
+export const actions = {
+    newMessageActionCreator: (idMessage: number, idDialog: number, message_area: string) => ({
+            type: 'SN/DIALOGS/NEW-MESSAGE',
+            idMessage: idMessage,
+            idDialog: idDialog,
+            message_area
+        } as const
+    ),
+    setCurrentDialogActionCreator: (currentDialog: number) =>
+        ({type: 'SN/DIALOGS/SET_CURRENT_DIALOG', currentDialog} as const)
 }
-
-export const newMessageActionCreator = (idMessage: number, idDialog: number, message_area: any): NewMessageActionCreatorType => ({
-        type: NEW_MESSAGE,
-        idMessage: idMessage,
-        idDialog: idDialog,
-        message_area
-    }
-);
-
-type SetCurrentDialogActionCreatorType = {
-    type: typeof SET_CURRENT_DIALOG
-    currentDialog: number
-}
-
-export const setCurrentDialogActionCreator = (currentDialog:number):SetCurrentDialogActionCreatorType => ({type: SET_CURRENT_DIALOG, currentDialog})
 
 export default dialogsReducer;
