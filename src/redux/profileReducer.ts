@@ -15,11 +15,11 @@ let initialState = {
     newPostText: ""
 };
 
-export type InitialStateType = typeof initialState;
+export type ProfileInitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsType | FormAction>;
 
-const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsType): ProfileInitialStateType => {
 
     switch (action.type) {
         case 'SN/PROFILE/ADD-POST': {

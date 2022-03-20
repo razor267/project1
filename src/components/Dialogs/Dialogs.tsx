@@ -2,20 +2,36 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Redirect} from "react-router-dom";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 import userPhoto from "../../assets/images/avatar.jpg";
+import {InitialStateType} from "../../redux/dialogsReducer";
+import {ProfileInitialStateType} from "../../redux/profileReducer";
 
-const Dialogs = (props) => {
+type PropsType = {
+    dialogs: InitialStateType
+    setCurrentDialog: (id: number) => void
+    newMessage: (idMessage: number, idDialog: number, message_area: string) => void
+    profile: ProfileInitialStateType
+}
 
-    let dialogId = props.currentDialog;
+export type NewMessageFormValuesType = {
+    idMessage: number
+    idDialog: number
+    message_area: string
+}
+
+const Dialogs: React.FC<PropsType> = (props) => {
+
+    const profile = props.profile.profile;
+
+    let dialogId = props.dialogs.currentDialog;
     let currentDialog = dialogId - 1
 
-    let onDialogChange = (id) => {
+    let onDialogChange = (id: number) => {
         props.setCurrentDialog(id);
     }
 
-    let newMessage = (values) => {
+    let newMessage = (values: NewMessageFormValuesType) => {
         let idDialog = currentDialog;
         let idMessage = props.dialogs.dialogs[idDialog].dialog.length + 1
         props.newMessage(idMessage, idDialog, values.message_area);
@@ -25,8 +41,6 @@ const Dialogs = (props) => {
                                                                      key={d.id}
                                                                      currentDialog={props.dialogs.currentDialog}
                                                                      onDialogChange={onDialogChange}/>);
-
-    if (props.isAuth === false) return <Redirect to={'/login'}/>;
 
     if (!dialogId) {
         return (
@@ -41,7 +55,7 @@ const Dialogs = (props) => {
         message={m.message}
         iOrNot={m.iOrNot}
         avatar={props.dialogs.dialogs[currentDialog].avatar}
-        myAvatar={props.profile === null ? userPhoto : props.profile.photos.large} key={m.id}/>);
+        myAvatar={profile === null ? userPhoto : profile.photos.large} key={m.id}/>);
 
     return (
         <div className={s.dialogs}>

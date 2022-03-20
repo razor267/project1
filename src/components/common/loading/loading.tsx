@@ -1,7 +1,7 @@
 import load from "../../../assets/images/load.gif";
 import React from "react";
 
-let Loading = (props)=> {
+let Loading: React.FC = ()=> {
     return <img src={load}/>
 }
 

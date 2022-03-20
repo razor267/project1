@@ -114,14 +114,14 @@ const dialogsReducer = (state = initialState, action: ActionsType): InitialState
 }
 
 export const actions = {
-    newMessageActionCreator: (idMessage: number, idDialog: number, message_area: string) => ({
+    newMessage: (idMessage: number, idDialog: number, message_area: string) => ({
             type: 'SN/DIALOGS/NEW-MESSAGE',
             idMessage: idMessage,
             idDialog: idDialog,
             message_area
         } as const
     ),
-    setCurrentDialogActionCreator: (currentDialog: number) =>
+    setCurrentDialog: (currentDialog: number) =>
         ({type: 'SN/DIALOGS/SET_CURRENT_DIALOG', currentDialog} as const)
 }
 

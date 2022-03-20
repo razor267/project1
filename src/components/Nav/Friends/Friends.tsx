@@ -1,7 +1,12 @@
 import React from "react";
 import s from "./Friends.module.css";
+import {InitialStateType} from "../../../redux/navBarReducer";
 
-const Friends = (props) => {
+type PropsType = {
+    friends: InitialStateType
+}
+
+const Friends:React.FC<PropsType> = (props) => {
     return (
         <div className={s.friendsBar}>
             <div className={s.header}>Friends</div>
