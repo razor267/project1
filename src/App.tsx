@@ -1,19 +1,19 @@
-import React, {Component} from "react";
-import './App.css';
-import NavBar from './components/Nav/NavBar';
-import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import UsersContainer from "./components/Users/UsersContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/Login";
-import {connect, Provider} from "react-redux";
-import {compose} from "redux";
-import {initializeApp} from "./redux/appReducer";
-import Loading from "./components/common/loading/loading";
-import store, {AppStateType} from "./redux/reduxStore";
-import {withSuspense} from "./hoc/withSuspense";
+import React, {Component} from 'react'
+import './App.css'
+import NavBar from './components/Nav/NavBar'
+import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom'
+import News from './components/News/News'
+import Music from './components/Music/Music'
+import Settings from './components/Settings/Settings'
+import {UsersPage} from './components/Users/UsersContainer'
+import HeaderContainer from './components/Header/HeaderContainer'
+import {LoginPage} from './components/Login/LoginPage'
+import {connect, Provider} from 'react-redux'
+import {compose} from 'redux'
+import {initializeApp} from './redux/appReducer'
+import Loading from './components/common/loading/loading'
+import store, {AppStateType} from './redux/reduxStore'
+import {withSuspense} from './hoc/withSuspense'
 
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -62,7 +62,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/settings' component={Settings}/>
-                        <Route path='/users' render={() => <UsersContainer pageTitle={"Самураи"}/>}/>
+                        <Route path='/users' render={() => <UsersPage pageTitle={"Самураи"}/>}/>
                         <Route path='/login' render={() => <LoginPage/>}/>
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>
