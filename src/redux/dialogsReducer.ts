@@ -56,7 +56,7 @@ let initialState = {
         {
             id: 5,
             name: 'Evelina',
-            avatar: 'https://krasivosti.pro/uploads/posts/2021-07/1626219796_19-krasivosti-pro-p-krolik-snezhok-zaitsevie-krasivo-foto-20.jpg',
+            avatar: 'https://cache3.youla.io/files/images/780_780/5a/31/5a314b10a09cd56f315f2b75.jpg',
             dialog:
                 [
                     {id: 1, message: 'Hi', iOrNot: true},

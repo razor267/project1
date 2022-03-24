@@ -44,12 +44,12 @@ export const Users: FC<PropsType> = (props) => {
     }, [])
 
     useEffect(() => {
-        const query:QueryParamsType = {}
+        const query: QueryParamsType = {}
         if (!!filter.term) query.term = filter.term
         if (filter.friend !== null) query.friend = String(filter.friend)
         if (currentPage !== 1) query.page = String(currentPage)
         history.push({
-            pathname: '/users',
+            pathname: '/developers',
             search: queryString.stringify(query)
         })
     }, [filter, currentPage])
