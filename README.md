@@ -24,9 +24,19 @@ npm start
 <p align="center"><img src="https://i.ibb.co/1J2QqcT/preview-project.gif" alt="ReviewProject" border="0"></p>
 
 <div align="right">
-  <img src="https://i.ibb.co/XLPJSyM/react-icon.png" alt="react" height="40px"/>
-  <img src="https://i.ibb.co/PrCNpDg/redux-icon.png" alt="redux" height="40px"/>
-  <img src="https://i.ibb.co/5n6NZh2/typescript-icon.png" alt="typeScript" height="40px"/>
-  <img src="https://i.ibb.co/72YpBjg/icons8-css-60.png" alt="css" height="40px"/>
-  <img src="https://i.ibb.co/R6XVMZt/html-icon.png" alt="html" height="40px"/>
+  <a href="https://reactjs.org/">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
+  </a>
+  <a href="https://redux.js.org/">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg" title="Redux" alt="Redux " width="40" height="40"/>&nbsp;
+  </a>
+  <a href="https://www.typescriptlang.org/">    
+    <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-plain.svg" title="TypeScript" alt="TypeScript" width="40" height="40"/>&nbsp;
+  </a>
+  <a href="https://www.w3.org/Style/CSS/">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+  </a>
+  <a href="https://html.spec.whatwg.org/">    
+    <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
+  </a>
 </div>
